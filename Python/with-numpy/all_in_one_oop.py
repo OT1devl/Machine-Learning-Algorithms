@@ -2,21 +2,18 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def MSE(y, y_pred, derv=False):
-    if derv: 
-        return 2*(y_pred-y)
+    if derv: return 2*(y_pred-y)
     return np.mean((y_pred-y)**2)
 
 def sigmoid(x, derv=False):
-    if derv: 
-        return x * (1 - x)
+    if derv: return x * (1 - x)
     return 1 / (1 + np.exp(-x))
 
 def step(x):
     return np.where(x > 0, 1, -1)
 
 def BCE(y, y_pred, derv=False):
-    if derv: 
-        return -y/(y_pred+1e-8)+(1-y)/(1-y_pred+1e-8)
+    if derv: return -y/(y_pred+1e-8)+(1-y)/(1-y_pred+1e-8)
     return np.mean(-y*np.log(y_pred+1e-8)+(1-y)*np.log(1-y_pred+1e-8))
 
 def euclidean_distance(x1, x2):
