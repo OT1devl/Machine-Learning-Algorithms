@@ -2,15 +2,21 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def MSE(y, y_pred, derv=False):
-    if derv: return 2*(y_pred-y)
+    if derv: 
+        return 2*(y_pred-y)
     return np.mean((y_pred-y)**2)
 
 def sigmoid(x, derv=False):
-    if derv: return x * (1 - x)
+    if derv: 
+        return x * (1 - x)
     return 1 / (1 + np.exp(-x))
 
+def step(x):
+    return np.where(x > 0, 1, -1)
+
 def BCE(y, y_pred, derv=False):
-    if derv: return -y/(y_pred+1e-8)+(1-y)/(1-y_pred+1e-8)
+    if derv: 
+        return -y/(y_pred+1e-8)+(1-y)/(1-y_pred+1e-8)
     return np.mean(-y*np.log(y_pred+1e-8)+(1-y)*np.log(1-y_pred+1e-8))
 
 def euclidean_distance(x1, x2):
@@ -68,7 +74,32 @@ class Logistic_Regression(Linear_Regression):
     def predict(self, x):
         return self.act(x @ self.m + self.b)
 
+class Perceptron:
+    def __init__(self, features):
+        self.w = np.random.randn(features, 1) * 0.1
+        self.b = np.zeros((1, 1))
 
+    def learn(self, y, outp, x, lr):
+        error = y - outp
+        self.w += lr * x.T @ error
+        self.b += lr * error.sum(axis=0, keepdims=True)
+
+    def train(self, x, y, epochs=100, batch_size=32, lr=0.01, print_every=0.1):
+        for epoch in range(1, epochs + 1):
+            for batch in range(0, x.shape[0], batch_size):
+                x_batch = x[batch:batch + batch_size]
+                y_batch = y[batch:batch + batch_size]
+                predictions = self.predict(x_batch)
+                self.learn(y_batch, predictions, x_batch, lr)
+            if epoch % max(1, int(epochs * print_every)) == 0:
+                acc = np.mean(self.predict(x)==y)
+                print(f'Epoch: [{epoch}/{epochs}]> Accuracy: {acc:.2%}')
+
+
+    def predict(self, x):
+        return step(x @ self.w + self.b)
+
+    
 
 class DecisionStump:
     def __init__(self):
