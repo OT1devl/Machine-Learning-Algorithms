@@ -1,15 +1,18 @@
-class DecisionTree:
-    class Node:
-        def __init__(self, feature=None, threshold=None, left=None, right=None,*, value=None):
-            self.feature = feature
-            self.threshold = threshold
-            self.left = left
-            self.right = right
-            self.value = value
+import numpy as np
+import matplotlib.pyplot as plt
 
-        def is_leaf_node(self):
-            return self.value is not None
-        
+class Node:
+    def __init__(self, feature=None, threshold=None, left=None, right=None, *, value=None):
+        self.feature = feature
+        self.threshold = threshold
+        self.left = left
+        self.right = right
+        self.value = value
+
+    def is_leaf_node(self):
+        return self.value is not None
+
+class Decision_Tree:
     def __init__(self, min_samples_split=2, max_depth=100, n_features=None):
         self.min_samples_split = min_samples_split
         self.max_depth = max_depth
@@ -25,20 +28,21 @@ class DecisionTree:
 
         if depth >= self.max_depth or n_labels == 1 or n_samples < self.min_samples_split:
             leaf_value = self._most_common_label(y)
-            return self.Node(value=leaf_value)
-        
-        feat_idx = np.random.choice(n_feats, self.n_features, replace=False)
-        
-        best_feature, best_thresh = self._best_split(X, y, feat_idx)
+            return Node(value=leaf_value)
 
+        feat_idx = np.random.choice(n_feats, self.n_features, replace=False)
+        best_feature, best_thresh = self._best_split(X, y, feat_idx)
         left_idxs, right_idxs = self._split(X[:, best_feature], best_thresh)
+
         left = self._grow_tree(X[left_idxs, :], y[left_idxs], depth+1)
         right = self._grow_tree(X[right_idxs, :], y[right_idxs], depth+1)
-        return self.Node(best_feature, best_thresh, left, right)
-    
+
+        return Node(best_feature, best_thresh, left, right)
+
     def _best_split(self, X, y, feat_idxs):
         best_gain = -1
         split_idx, split_threshold = None, None
+
         for feat_idx in feat_idxs:
             X_column = X[:, feat_idx]
             thresholds = np.unique(X_column)
@@ -52,27 +56,27 @@ class DecisionTree:
                     split_threshold = thr
 
         return split_idx, split_threshold
-    
+
     def _information_gain(self, y, X_column, threshold):
         parent_entropy = self._entropy(y)
-
         left_idx, right_idx = self._split(X_column, threshold)
 
         if len(left_idx) == 0 or len(right_idx) == 0:
             return 0
-        
+
         n = len(y)
         n_l, n_r = len(left_idx), len(right_idx)
         e_l, e_r = self._entropy(y[left_idx]), self._entropy(y[right_idx])
 
         child_entropy = (n_l/n) * e_l + (n_r/n) * e_r
-
         information_gain = parent_entropy - child_entropy
+
         return information_gain
 
     def _split(self, X_column, split_thresh):
         left_idxs = np.argwhere(X_column <= split_thresh).flatten()
         right_idxs = np.argwhere(X_column > split_thresh).flatten()
+
         return left_idxs, right_idxs
 
     def _entropy(self, y):
@@ -81,16 +85,47 @@ class DecisionTree:
         return -np.sum([p * np.log(p) for p in ps if p>0])
 
     def _most_common_label(self, y):
-        most_common = Counter(y).most_common(1)[0][0]
-        return most_common
+        label_counts = np.bincount(y)
+        return np.argmax(label_counts)
 
     def _traverse_tree(self, x, node):
         if node.is_leaf_node():
             return node.value
-        
+
         if x[node.feature] <= node.threshold:
             return self._traverse_tree(x, node.left)
+
         return self._traverse_tree(x, node.right)
 
     def predict(self, X):
         return np.array([self._traverse_tree(x, self.root) for x in X])
+
+def generate_data():
+    X = np.random.rand(100, 2)
+    y = (X[:, 0] + X[:, 1] > 1).astype(int)
+    return X, y
+
+def plot(X, y, tree):
+    x_min, x_max = X[:, 0].min() - 0.1, X[:, 0].max() + 0.1
+    y_min, y_max = X[:, 1].min() - 0.1, X[:, 1].max() + 0.1
+
+    xx, yy = np.meshgrid(np.linspace(x_min, x_max, 100), np.linspace(y_min, y_max, 100))
+    Z = tree.predict(np.c_[xx.ravel(), yy.ravel()])
+    Z = Z.reshape(xx.shape)
+
+    plt.contourf(xx, yy, Z, alpha=0.8)
+    plt.scatter(X[:, 0], X[:, 1], c=y, edgecolors='k', marker='o', s=50, cmap=plt.cm.coolwarm)
+    plt.title("Decision Tree Classifier Decision Boundary")
+    plt.xlabel("Feature 1")
+    plt.ylabel("Feature 2")
+    plt.show()
+
+X, y = generate_data()
+tree = Decision_Tree(min_samples_split=2, max_depth=10, n_features=2)
+tree.train(X, y)
+predictions = tree.predict(X)
+
+print("First 10 predictions:", predictions[:10])
+print("First 10 true labels:", y[:10])
+
+plot(X, y, tree)
