@@ -34,24 +34,8 @@ This repository contains implementations of various classic machine learning alg
 
 ---
 
-### 📂 **Main Directories and Files**
-- **linear_regression.py**: Implementation of the Linear Regression algorithm.
-- **logistic_regression.py**: Implementation of Logistic Regression for classification tasks.
-- **knn.py**: K-Nearest Neighbors algorithm, both for classification and regression.
-- **svm.py**: Implementation of Support Vector Machines for classification tasks.
-- **decision_tree.py**: A decision tree classifier for supervised learning.
-- **naive_bayes.py**: A basic implementation of the Naive Bayes algorithm.
-- **kmeans.py**: K-Means Clustering algorithm for unsupervised learning.
-- **pca.py**: Principal Component Analysis (PCA) for dimensionality reduction.
-- **visualizations/**: Directory containing visualizations of model outputs and results.
-
----
-
-### 🚀 **Future Improvements**
-- Additional advanced algorithms like Random Forests, XGBoost, etc.
-- Integration of performance metrics for each model (e.g., accuracy, precision, recall, F1 score).
-- Enhanced visualization tools to demonstrate model learning over time.
-- Add support for more complex datasets and larger-scale experiments.
+### 🚀 **Future**
+- Making it in C++, Java and in Python (no external librarys)
 
 ---
 
