@@ -34,16 +34,34 @@ This repository contains implementations of various classic machine learning alg
 
 ---
 
-### 📂 **How to Use**
-Clone this repository to your local machine:
-```bash
-git clone https://github.com/OT1devl/Machine-Learning-Algorithms.git
-cd Machine-Learning-Algorithms
-```
-Each algorithm has its own folder containing the necessary code. To run any of the algorithms, navigate to the corresponding folder and execute the Python script.
+### 📂 **Main Directories and Files**
+- **linear_regression.py**: Implementation of the Linear Regression algorithm.
+- **logistic_regression.py**: Implementation of Logistic Regression for classification tasks.
+- **knn.py**: K-Nearest Neighbors algorithm, both for classification and regression.
+- **svm.py**: Implementation of Support Vector Machines for classification tasks.
+- **decision_tree.py**: A decision tree classifier for supervised learning.
+- **naive_bayes.py**: A basic implementation of the Naive Bayes algorithm.
+- **kmeans.py**: K-Means Clustering algorithm for unsupervised learning.
+- **pca.py**: Principal Component Analysis (PCA) for dimensionality reduction.
+- **visualizations/**: Directory containing visualizations of model outputs and results.
 
-For example, to run the K-Nearest Neighbors algorithm:
-```bash
-cd KNN
-python knn.py
-```
+---
+
+### 🚀 **Future Improvements**
+- Additional advanced algorithms like Random Forests, XGBoost, etc.
+- Integration of performance metrics for each model (e.g., accuracy, precision, recall, F1 score).
+- Enhanced visualization tools to demonstrate model learning over time.
+- Add support for more complex datasets and larger-scale experiments.
+
+---
+
+### 📊 **Statistics**
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=OT1devl&show_icons=true&theme=radical" width="49%" />
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=OT1devl&theme=radical" width="49%" />
+</p>
+
+---
+
+### 🚀 **Contact**
+📧 **Email:** *[otidevv1@gmail.com]* 
