@@ -35,7 +35,7 @@ This repository contains implementations of various classic machine learning alg
 ---
 
 ### 🚀 **Future**
-- Making it in C++, Java and in Python (no external librarys)
+- Making it in C++, Java and in Python (no external libraries)
 
 ---
 
