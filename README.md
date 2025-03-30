@@ -3,7 +3,6 @@
 
 <p align="center">
   <img src="https://img.shields.io/github/languages/top/OT1devl/Machine-Learning-Algorithms?style=flat" alt="Languages" />
-  <img src="https://img.shields.io/github/license/OT1devl/Machine-Learning-Algorithms?style=flat" alt="License" />
   <img src="https://img.shields.io/github/last-commit/OT1devl/Machine-Learning-Algorithms?style=flat" alt="Last Commit" />
 </p>
 
