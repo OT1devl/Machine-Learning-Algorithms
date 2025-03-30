@@ -33,6 +33,11 @@ This repository contains implementations of various classic machine learning alg
 
 ---
 
+![Languages](https://img.shields.io/github/languages/top/OT1devl/Machine-Learning-Algorithms?style=flat)  
+![Languages Breakdown](https://img.shields.io/github/languages/count/OT1devl/Machine-Learning-Algorithms?style=flat)  
+![Code Distribution](https://img.shields.io/github/languages/code-size/OT1devl/Machine-Learning-Algorithms?style=flat)
+
+---
 ### 🚀 **Future**
 - Making it in C++, Java and in Python (no external libraries)
 
