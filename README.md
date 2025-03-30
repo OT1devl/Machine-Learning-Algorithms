@@ -46,4 +46,4 @@ This repository contains implementations of various classic machine learning alg
 ---
 
 ### 🚀 **Contact**
-📧 **Email:** *[otidevv1@gmail.com]* 
+📧 **Email:** *[otidevv1@gmail.com](mailto:otidevv1@gmail.com)* 
