@@ -38,12 +38,5 @@ This repository contains implementations of various classic machine learning alg
 
 ---
 
-### 📊 **Statistics**
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=OT1devl&show_icons=true&theme=radical" width="49%" />
-</p>
-
----
-
-### 🚀 **Contact**
+### 📱 **Contact**
 📧 **Email:** *[otidevv1@gmail.com](mailto:otidevv1@gmail.com)* 
